@@ -1,0 +1,33 @@
+#spectrom_sync {
+	border: none;
+	display: inline-block;
+}
+
+#spectrom_sync #sync-logo {
+	margin-left: 1rem;
+}
+
+#spectrom_sync .sync-button {
+	margin-top: 5px !important;
+	margin-right: 5px !important;
+	width: 14rem;
+	font-size: 70%;
+}
+
+#sync-message-container {
+	position: absolute;
+	top: 10rem;
+	left: 38rem;
+	background-color: white;
+	z-index: 1000;
+	border: 1px solid #4accf6;
+	padding: 6px 4px 3px 5px;
+}
+#sync-content-anim {
+	margin-right: .5rem;
+}
+#sync-message-dismiss span.dashicons {
+	color: red;
+	font-size: 80%;
+	vertical-align: baseline;
+}
