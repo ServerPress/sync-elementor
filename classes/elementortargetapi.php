@@ -50,15 +50,18 @@ SyncDebug::log(__METHOD__.'():' . __LINE__ . ' got header value: ' . $requires);
 				$response->error_code(SyncElementorApiRequest::ERROR_ELEMENTOR_VERSION_MISMATCH);
 				return;
 			}
+			// is Source using Elementor Pro
 			$vers = $controller->get_header(SyncElementorApiRequest::HEADER_ELEMENTOR_PRO_VERSION);
-			if (!empty($vers) && !defined('ELEMENTOR_PRO_VERSION')) {
-				// Elementor Pro running on Source but not on Target
-				$response->error_code(SyncElementorApiRequest::ERROR_ELEMENTOR_PRO_REQUIRED);
-				return;
-			}
-			if (version_compare($vers, ELEMENTOR_PRO_VERSION, '!=') && '1' === SyncOptions::get('strict', '0')) {
-				$response->error_code(SyncElementorApiRequest::ERROR_ELEMENTOR_PRO_VERSION_MISMATCH);
-				return;
+			if (!empty($vers)) {
+				if (!defined('ELEMENTOR_PRO_VERSION')) {
+					// Elementor Pro running on Source but not on Target
+					$response->error_code(SyncElementorApiRequest::ERROR_ELEMENTOR_PRO_REQUIRED);
+					return;
+				}
+				if (version_compare($vers, ELEMENTOR_PRO_VERSION, '!=') && '1' === SyncOptions::get('strict', '0')) {
+					$response->error_code(SyncElementorApiRequest::ERROR_ELEMENTOR_PRO_VERSION_MISMATCH);
+					return;
+				}
 			}
 
 			// set process to TRUE. This is done only after version compares are complete
